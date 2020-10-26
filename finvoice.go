@@ -18,8 +18,10 @@ type Finvoice struct {
 	NoNamespaceSchemaLocation  string                     `xml:"xsi:noNamespaceSchemaLocation,attr"`
 	MessageTransmissionDetails MessageTransmissionDetails `xml:"MessageTransmissionDetails"`
 	SellerPartyDetails         SellerPartyDetails         `xml:"SellerPartyDetails"`
+	SellerCommunicationDetails SellerCommunicationDetails `xml:"SellerCommunicationDetails"`
 	SellerInformationDetails   SellerInformationDetails   `xml:"SellerInformationDetails"`
 	BuyerPartyDetails          BuyerPartyDetails          `xml:"BuyerPartyDetails"`
+	BuyerCommunicationDetails  BuyerCommunicationDetails  `xml:"BuyerCommunicationDetails"`
 	DeliveryDetails            DeliveryDetails            `xml:"DeliveryDetails"`
 	InvoiceDetails             InvoiceDetails             `xml:"InvoiceDetails"`
 	PaymentStatusDetails       PaymentStatusDetails       `xml:"PaymentStatusDetails"`
@@ -85,8 +87,13 @@ type SellerPostalAddressDetails struct {
 	CountryCode              string `xml:"CountryCode"`
 }
 
+type SellerCommunicationDetails struct {
+	SellerEmailaddressIdentifier string `xml:"SellerEmailaddressIdentifier"`
+}
+
 type SellerInformationDetails struct {
-	SellerAccountDetails []struct {
+	SellerCommonEmailaddressIdentifier string `xml:"SellerCommonEmailaddressIdentifier"`
+	SellerAccountDetails               []struct {
 		SellerAccountID struct {
 			IdentificationSchemeName string `xml:"IdentificationSchemeName,attr"`
 		} `xml:"SellerAccountID"`
@@ -117,6 +124,10 @@ type BuyerPostalAddressDetails struct {
 	BuyerPostOfficeBoxIdentifier string `xml:"BuyerPostOfficeBoxIdentifier"`
 }
 
+type BuyerCommunicationDetails struct {
+	BuyerEmailaddressIdentifier string `xml:"BuyerEmailaddressIdentifier"`
+}
+
 type DeliveryDetails struct {
 	DeliveryDate Date `xml:"DeliveryDate"`
 }
@@ -130,13 +141,19 @@ type InvoiceDetails struct {
 	SellerReferenceIdentifier     string                  `xml:"SellerReferenceIdentifier"`
 	BuyersSellerIdentifier        string                  `xml:"BuyersSellerIdentifier"`
 	SellersBuyerIdentifier        string                  `xml:"SellersBuyerIdentifier"`
-	BuyerReferenceIdentifier      string                  `xml:"BuyerReferenceIdentifier"`
 	OrderIdentifier               string                  `xml:"OrderIdentifier"`
+	BuyerReferenceIdentifier      string                  `xml:"BuyerReferenceIdentifier"`
+	ProjectReferenceIdentifier    string                  `xml:"ProjectReferenceIdentifier"`
+	DefinitionDetails             DefinitionDetails       `xml:"DefinitionDetails"`
 	InvoiceTotalVATExcludedAmount AmountCurrency          `xml:"InvoiceTotalVatExcludedAmount"`
 	InvoiceTotalVatAmount         AmountCurrency          `xml:"InvoiceTotalVatAmount"`
 	InvoiceTotalVatIncludedAmount AmountCurrency          `xml:"InvoiceTotalVatIncludedAmount"`
 	VATSpecificationDetails       VATSpecificationDetails `xml:"VatSpecificationDetails"`
 	PaymentTermsDetails           PaymentTermsDetails     `xml:"PaymentTermsDetails"`
+}
+
+type DefinitionDetails struct {
+	DefinitionHeaderText string `xml:"DefinitionHeaderText"`
 }
 
 func (i InvoiceDetails) IsEmpty() bool {

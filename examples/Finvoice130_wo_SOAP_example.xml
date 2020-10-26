@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<?xml-stylesheet type="text/xsl" href="Finvoice.xsl"?>
+<Finvoice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="1.3" xsi:noNamespaceSchemaLocation="Finvoice.xsd">
+  <SellerPartyDetails>
+    <SellerPartyIdentifier>FI04247510</SellerPartyIdentifier>
+    <SellerOrganisationName>Viestipaino Oy</SellerOrganisationName>
+    <SellerOrganisationTaxCode>FI04247510</SellerOrganisationTaxCode>
+    <SellerPostalAddressDetails>
+      <SellerStreetName>Osuusmyllynkatu 5 D</SellerStreetName>
+      <SellerTownName>TAMPERE</SellerTownName>
+      <SellerPostCodeIdentifier>33700</SellerPostCodeIdentifier>
+    </SellerPostalAddressDetails>
+  </SellerPartyDetails>
+  <SellerContactPersonName>Viestipaino</SellerContactPersonName>
+  <SellerCommunicationDetails>
+    <SellerEmailaddressIdentifier/>
+  </SellerCommunicationDetails>
+  <SellerInformationDetails>
+    <SellerHomeTownName>TAMPERE</SellerHomeTownName>
+    <SellerPhoneNumber>(03) 3899 199</SellerPhoneNumber>
+    <SellerFaxNumber>(03) 3899 190</SellerFaxNumber>
+    <SellerCommonEmailaddressIdentifier>viestipaino@viestipaino.fi</SellerCommonEmailaddressIdentifier>
+    <SellerWebaddressIdentifier>www.viestipaino.fi</SellerWebaddressIdentifier>
+    <SellerAccountDetails>
+      <SellerAccountID IdentificationSchemeName="IBAN">FI3815843000040531</SellerAccountID>
+      <SellerBic IdentificationSchemeName="BIC">NDEAFIHH</SellerBic>
+    </SellerAccountDetails>
+    <SellerAccountDetails>
+      <SellerAccountID IdentificationSchemeName="BBAN">158430-40531</SellerAccountID>
+      <SellerBic IdentificationSchemeName="BIC">NDEAFIHH</SellerBic>
+    </SellerAccountDetails>
+  </SellerInformationDetails>
+  <BuyerPartyDetails>
+    <BuyerPartyIdentifier>4644</BuyerPartyIdentifier>
+    <BuyerOrganisationName>Sisä-Suomen poliisilaitos</BuyerOrganisationName>
+    <BuyerOrganisationTaxCode>2288666-6</BuyerOrganisationTaxCode>
+    <BuyerPostalAddressDetails>
+      <BuyerStreetName>Hatanpään valtatie 16</BuyerStreetName>
+      <BuyerTownName>TAMPERE</BuyerTownName>
+      <BuyerPostCodeIdentifier>33101</BuyerPostCodeIdentifier>
+    </BuyerPostalAddressDetails>
+  </BuyerPartyDetails>
+  <BuyerOrganisationUnitNumber>003722886666833</BuyerOrganisationUnitNumber>
+  <BuyerContactPersonName>Teija Koivunen</BuyerContactPersonName>
+  <BuyerCommunicationDetails>
+    <BuyerPhoneNumberIdentifier>07 18745301</BuyerPhoneNumberIdentifier>
+    <BuyerEmailaddressIdentifier/>
+  </BuyerCommunicationDetails>
+  <DeliveryPartyDetails>
+    <DeliveryOrganisationName/>
+    <DeliveryPostalAddressDetails>
+      <DeliveryStreetName>Hatanpään valtatie 16</DeliveryStreetName>
+      <DeliveryTownName>TAMPERE</DeliveryTownName>
+      <DeliveryPostCodeIdentifier>33100</DeliveryPostCodeIdentifier>
+    </DeliveryPostalAddressDetails>
+  </DeliveryPartyDetails>
+  <DeliveryDetails>
+    <DeliveryDate Format="CCYYMMDD">20170201</DeliveryDate>
+    <DeliveryMethodText/>
+    <DeliveryTermsText/>
+  </DeliveryDetails>
+  <InvoiceDetails>
+    <InvoiceTypeCode>INV01</InvoiceTypeCode>
+    <InvoiceTypeText>LASKU</InvoiceTypeText>
+    <OriginCode>Original</OriginCode>
+    <InvoiceNumber>170093</InvoiceNumber>
+    <InvoiceDate Format="CCYYMMDD">20170201</InvoiceDate>
+    <SellerReferenceIdentifier/>
+    <OrderIdentifier/>
+    <InvoiceTotalVatExcludedAmount AmountCurrencyIdentifier="EUR">153,23</InvoiceTotalVatExcludedAmount>
+    <InvoiceTotalVatAmount AmountCurrencyIdentifier="EUR">36,77</InvoiceTotalVatAmount>
+    <InvoiceTotalVatIncludedAmount AmountCurrencyIdentifier="EUR">190,00</InvoiceTotalVatIncludedAmount>
+    <VatSpecificationDetails>
+      <VatBaseAmount AmountCurrencyIdentifier="EUR">153,23</VatBaseAmount>
+      <VatRatePercent>24</VatRatePercent>
+      <VatRateAmount AmountCurrencyIdentifier="EUR">36,77</VatRateAmount>
+    </VatSpecificationDetails>
+    <PaymentTermsDetails>
+      <PaymentTermsFreeText>21 pv netto</PaymentTermsFreeText>
+      <InvoiceDueDate Format="CCYYMMDD">20170222</InvoiceDueDate>
+      <PaymentOverDueFineDetails>
+        <PaymentOverDueFineFreeText>Viivästyskorko 10%</PaymentOverDueFineFreeText>
+        <PaymentOverDueFinePercent>10</PaymentOverDueFinePercent>
+      </PaymentOverDueFineDetails>
+    </PaymentTermsDetails>
+  </InvoiceDetails>
+  <VirtualBankBarcode>438158430000405310001900000000000004644001700936170222</VirtualBankBarcode>
+  <InvoiceRow>
+    <ArticleIdentifier>3070</ArticleIdentifier>
+    <ArticleName>Onnittelukirja 60 kpl, Kiitoskirja 20 kpl</ArticleName>
+    <DeliveredQuantity QuantityUnitCode="kpl">80</DeliveredQuantity>
+    <UnitPriceAmount AmountCurrencyIdentifier="EUR">1,92</UnitPriceAmount>
+    <RowVatRatePercent>24</RowVatRatePercent>
+    <RowVatAmount AmountCurrencyIdentifier="EUR">36,77</RowVatAmount>
+    <RowVatExcludedAmount AmountCurrencyIdentifier="EUR">153,23</RowVatExcludedAmount>
+    <RowAmount AmountCurrencyIdentifier="EUR">190,00</RowAmount>
+  </InvoiceRow>
+  <EpiDetails>
+    <EpiIdentificationDetails>
+      <EpiDate Format="CCYYMMDD">20170201</EpiDate>
+      <EpiReference>00000004644001700936</EpiReference>
+    </EpiIdentificationDetails>
+    <EpiPartyDetails>
+      <EpiBfiPartyDetails>
+        <EpiBfiIdentifier IdentificationSchemeName="BIC">NDEAFIHH</EpiBfiIdentifier>
+      </EpiBfiPartyDetails>
+      <EpiBeneficiaryPartyDetails>
+        <EpiNameAddressDetails>Viestipaino Oy</EpiNameAddressDetails>
+        <EpiBei>FI04247510</EpiBei>
+        <EpiAccountID IdentificationSchemeName="IBAN">FI3815843000040531</EpiAccountID>
+      </EpiBeneficiaryPartyDetails>
+    </EpiPartyDetails>
+    <EpiPaymentInstructionDetails>
+      <EpiRemittanceInfoIdentifier IdentificationSchemeName="SPY">00000004644001700936</EpiRemittanceInfoIdentifier>
+      <EpiInstructedAmount AmountCurrencyIdentifier="EUR">190,00</EpiInstructedAmount>
+      <EpiCharge ChargeOption="SHA">SHA</EpiCharge>
+      <EpiDateOptionDate Format="CCYYMMDD">20170222</EpiDateOptionDate>
+    </EpiPaymentInstructionDetails>
+  </EpiDetails>
+</Finvoice>

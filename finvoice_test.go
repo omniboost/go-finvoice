@@ -36,6 +36,12 @@ func TestFinvoice(t *testing.T) {
 			CountryCode:              "NL",
 		},
 	}
+	f.SellerCommunicationDetails = finvoice.SellerCommunicationDetails{
+		SellerEmailaddressIdentifier: "seller2@omniboost.io",
+	}
+	f.SellerInformationDetails = finvoice.SellerInformationDetails{
+		SellerCommonEmailaddressIdentifier: "seller@omniboost.io",
+	}
 	f.BuyerPartyDetails = finvoice.BuyerPartyDetails{
 		BuyerPartyIdentifier:        "Buyer Party Identifier",
 		BuyerOrganisationName:       "Omniboost B.V.",
@@ -49,6 +55,9 @@ func TestFinvoice(t *testing.T) {
 			CountryName:                  "Netherlands",
 			BuyerPostOfficeBoxIdentifier: "",
 		},
+	}
+	f.BuyerCommunicationDetails = finvoice.BuyerCommunicationDetails{
+		BuyerEmailaddressIdentifier: "buyer@omniboost.io",
 	}
 	f.DeliveryDetails = finvoice.DeliveryDetails{
 		DeliveryDate: finvoice.Date{
