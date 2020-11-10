@@ -25,7 +25,7 @@ type Finvoice struct {
 	DeliveryDetails            DeliveryDetails            `xml:"DeliveryDetails"`
 	InvoiceDetails             InvoiceDetails             `xml:"InvoiceDetails"`
 	PaymentStatusDetails       PaymentStatusDetails       `xml:"PaymentStatusDetails"`
-	InvoiceRow                 []InvoiceRow               `xml:"InvoiceRow"`
+	InvoiceRows                []InvoiceRow               `xml:"InvoiceRow"`
 	EpiDetails                 EpiDetails                 `xml:"EpiDetails"`
 }
 
@@ -74,8 +74,8 @@ type MessageDetails struct {
 type SellerPartyDetails struct {
 	SellerPartyIdentifier        string                     `xml:"SellerPartyIdentifier"`
 	SellerPartyIdentifierUrlText string                     `xml:"SellerPartyIdentifierUrlText"`
-	SellerOrganisationName       []string                   `xml:"SellerOrganisationName"`
-	SellerOrganisationDepartment []string                   `xml:"SellerOrganisationDepartment"`
+	SellerOrganisationName       string                     `xml:"SellerOrganisationName"`
+	SellerOrganisationDepartment string                     `xml:"SellerOrganisationDepartment"`
 	SellerOrganisationTaxCode    string                     `xml:"SellerOrganisationTaxCode"`
 	SellerPostalAddressDetails   SellerPostalAddressDetails `xml:"SellerPostalAddressDetails"`
 }
@@ -133,23 +133,23 @@ type DeliveryDetails struct {
 }
 
 type InvoiceDetails struct {
-	InvoiceTypeCode               string                  `xml:"InvoiceTypeCode"`
-	InvoiceTypeText               string                  `xml:"InvoiceTypeText"`
-	OriginCode                    string                  `xml:"OriginCode"`
-	InvoiceNumber                 string                  `xml:"InvoiceNumber"`
-	InvoiceDate                   Date                    `xml:"InvoiceDate"`
-	SellerReferenceIdentifier     string                  `xml:"SellerReferenceIdentifier"`
-	BuyersSellerIdentifier        string                  `xml:"BuyersSellerIdentifier"`
-	SellersBuyerIdentifier        string                  `xml:"SellersBuyerIdentifier"`
-	OrderIdentifier               string                  `xml:"OrderIdentifier"`
-	BuyerReferenceIdentifier      string                  `xml:"BuyerReferenceIdentifier"`
-	ProjectReferenceIdentifier    string                  `xml:"ProjectReferenceIdentifier"`
-	DefinitionDetails             DefinitionDetails       `xml:"DefinitionDetails"`
-	InvoiceTotalVATExcludedAmount AmountCurrency          `xml:"InvoiceTotalVatExcludedAmount"`
-	InvoiceTotalVatAmount         AmountCurrency          `xml:"InvoiceTotalVatAmount"`
-	InvoiceTotalVatIncludedAmount AmountCurrency          `xml:"InvoiceTotalVatIncludedAmount"`
-	VATSpecificationDetails       VATSpecificationDetails `xml:"VatSpecificationDetails"`
-	PaymentTermsDetails           PaymentTermsDetails     `xml:"PaymentTermsDetails"`
+	InvoiceTypeCode               string                    `xml:"InvoiceTypeCode"`
+	InvoiceTypeText               string                    `xml:"InvoiceTypeText"`
+	OriginCode                    string                    `xml:"OriginCode"`
+	InvoiceNumber                 string                    `xml:"InvoiceNumber"`
+	InvoiceDate                   Date                      `xml:"InvoiceDate"`
+	SellerReferenceIdentifier     string                    `xml:"SellerReferenceIdentifier"`
+	BuyersSellerIdentifier        string                    `xml:"BuyersSellerIdentifier"`
+	SellersBuyerIdentifier        string                    `xml:"SellersBuyerIdentifier"`
+	OrderIdentifier               string                    `xml:"OrderIdentifier"`
+	BuyerReferenceIdentifier      string                    `xml:"BuyerReferenceIdentifier"`
+	ProjectReferenceIdentifier    string                    `xml:"ProjectReferenceIdentifier"`
+	DefinitionDetails             DefinitionDetails         `xml:"DefinitionDetails"`
+	InvoiceTotalVATExcludedAmount AmountCurrency            `xml:"InvoiceTotalVatExcludedAmount"`
+	InvoiceTotalVatAmount         AmountCurrency            `xml:"InvoiceTotalVatAmount"`
+	InvoiceTotalVatIncludedAmount AmountCurrency            `xml:"InvoiceTotalVatIncludedAmount"`
+	VATSpecificationDetails       []VATSpecificationDetails `xml:"VatSpecificationDetails"`
+	PaymentTermsDetails           PaymentTermsDetails       `xml:"PaymentTermsDetails"`
 }
 
 type DefinitionDetails struct {
@@ -293,7 +293,7 @@ func (n Number) IsEmpty() bool {
 
 type VATSpecificationDetails struct {
 	VATBaseAmount  AmountCurrency `xml:"VatBaseAmount"`
-	VATRatePercent string         `xml:"VatRatePercent"`
+	VATRatePercent Number         `xml:"VatRatePercent"`
 	VATRateAmount  AmountCurrency `xml:"VatRateAmount"`
 }
 
