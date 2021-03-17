@@ -161,6 +161,7 @@ type InvoiceDetails struct {
 	InvoiceTotalVatAmount         AmountCurrency            `xml:"InvoiceTotalVatAmount"`
 	InvoiceTotalVatIncludedAmount AmountCurrency            `xml:"InvoiceTotalVatIncludedAmount"`
 	VATSpecificationDetails       []VATSpecificationDetails `xml:"VatSpecificationDetails"`
+	InvoiceFreeText               string                    `xml:"InvoiceFreeText"`
 	PaymentTermsDetails           PaymentTermsDetails       `xml:"PaymentTermsDetails"`
 }
 
