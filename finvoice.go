@@ -12,21 +12,22 @@ import (
 )
 
 type Finvoice struct {
-	XMLName                    xml.Name                   `xml:"Finvoice"`
-	Version                    string                     `xml:"Version,attr"`
-	Xsi                        string                     `xml:"xmlns:xsi,attr"`
-	NoNamespaceSchemaLocation  string                     `xml:"xsi:noNamespaceSchemaLocation,attr"`
-	MessageTransmissionDetails MessageTransmissionDetails `xml:"MessageTransmissionDetails"`
-	SellerPartyDetails         SellerPartyDetails         `xml:"SellerPartyDetails"`
-	SellerCommunicationDetails SellerCommunicationDetails `xml:"SellerCommunicationDetails"`
-	SellerInformationDetails   SellerInformationDetails   `xml:"SellerInformationDetails"`
-	BuyerPartyDetails          BuyerPartyDetails          `xml:"BuyerPartyDetails"`
-	BuyerCommunicationDetails  BuyerCommunicationDetails  `xml:"BuyerCommunicationDetails"`
-	DeliveryDetails            DeliveryDetails            `xml:"DeliveryDetails"`
-	InvoiceDetails             InvoiceDetails             `xml:"InvoiceDetails"`
-	PaymentStatusDetails       PaymentStatusDetails       `xml:"PaymentStatusDetails"`
-	InvoiceRows                []InvoiceRow               `xml:"InvoiceRow"`
-	EpiDetails                 EpiDetails                 `xml:"EpiDetails"`
+	XMLName                       xml.Name                      `xml:"Finvoice"`
+	Version                       string                        `xml:"Version,attr"`
+	Xsi                           string                        `xml:"xmlns:xsi,attr"`
+	NoNamespaceSchemaLocation     string                        `xml:"xsi:noNamespaceSchemaLocation,attr"`
+	MessageTransmissionDetails    MessageTransmissionDetails    `xml:"MessageTransmissionDetails"`
+	SellerPartyDetails            SellerPartyDetails            `xml:"SellerPartyDetails"`
+	SellerCommunicationDetails    SellerCommunicationDetails    `xml:"SellerCommunicationDetails"`
+	SellerInformationDetails      SellerInformationDetails      `xml:"SellerInformationDetails"`
+	BuyerPartyDetails             BuyerPartyDetails             `xml:"BuyerPartyDetails"`
+	BuyerCommunicationDetails     BuyerCommunicationDetails     `xml:"BuyerCommunicationDetails"`
+	DeliveryDetails               DeliveryDetails               `xml:"DeliveryDetails"`
+	FactoringAgreementDetailsType FactoringAgreementDetailsType `xml:"FactoringAgreementDetailsType"`
+	InvoiceDetails                InvoiceDetails                `xml:"InvoiceDetails"`
+	PaymentStatusDetails          PaymentStatusDetails          `xml:"PaymentStatusDetails"`
+	InvoiceRows                   []InvoiceRow                  `xml:"InvoiceRow"`
+	EpiDetails                    EpiDetails                    `xml:"EpiDetails"`
 }
 
 func (f Finvoice) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
@@ -130,6 +131,17 @@ type BuyerCommunicationDetails struct {
 
 type DeliveryDetails struct {
 	DeliveryDate Date `xml:"DeliveryDate"`
+}
+
+type FactoringAgreementDetailsType struct {
+	FactoringAgreementIdentifier       string              `xml:"FactoringAgreementIdentifier"`
+	TransmissionListIdentifier         string              `xml:"TransmissionListIdentifier"`
+	EndorsementClauseCode              string              `xml:"EndorsementClauseCode"`
+	FactoringTypeCode                  string              `xml:"FactoringTypeCode"`
+	FactoringFreeText                  string              `xml:"FactoringFreeText"`
+	FactoringPartyIdentifier           PartyLegalRegIdType `xml:"FactoringPartyIdentifier"`
+	FactoringPartyName                 string              `xml:"FactoringPartyName"`
+	FactoringPartyPostalAddressDetails string              `xml:"FactoringPartyPostalAddressDetails"`
 }
 
 type InvoiceDetails struct {
@@ -347,3 +359,5 @@ func (d *DateTime) UnmarshalJSON(text []byte) (err error) {
 func (d DateTime) MarshalText() ([]byte, error) {
 	return []byte(d.Format("2006-01-02T15:04:05-07:00")), nil
 }
+
+type PartyLegalRegIdType string
