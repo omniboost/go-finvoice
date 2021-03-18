@@ -28,7 +28,7 @@ func TestFinvoice(t *testing.T) {
 	}
 	f.SellerPartyDetails = finvoice.SellerPartyDetails{
 		SellerPartyIdentifier:  "9876543-0",
-		SellerOrganisationName: []string{"Seller Organisation Name"},
+		SellerOrganisationName: "Seller Organisation Name",
 		SellerPostalAddressDetails: finvoice.SellerPostalAddressDetails{
 			SellerStreetName:         "TEST",
 			SellerTownName:           "TEST",
@@ -91,19 +91,21 @@ func TestFinvoice(t *testing.T) {
 			AmountCurrencyIdentifier: "EUR",
 			Amount:                   12.0,
 		},
-		VATSpecificationDetails: finvoice.VATSpecificationDetails{
-			VATBaseAmount: finvoice.AmountCurrency{
-				AmountCurrencyIdentifier: "EUR",
-				Amount:                   12.0,
-			},
-			VATRatePercent: "12",
-			VATRateAmount: finvoice.AmountCurrency{
-				AmountCurrencyIdentifier: "EUR",
-				Amount:                   12.0,
+		VATSpecificationDetails: []finvoice.VATSpecificationDetails{
+			{
+				VATBaseAmount: finvoice.AmountCurrency{
+					AmountCurrencyIdentifier: "EUR",
+					Amount:                   12.0,
+				},
+				VATRatePercent: 12,
+				VATRateAmount: finvoice.AmountCurrency{
+					AmountCurrencyIdentifier: "EUR",
+					Amount:                   12.0,
+				},
 			},
 		},
 	}
-	f.InvoiceRow = append(f.InvoiceRow, finvoice.InvoiceRow{
+	f.InvoiceRows = append(f.InvoiceRows, finvoice.InvoiceRow{
 		ArticleName:       "Test row",
 		ArticleIdentifier: "Article Identifier",
 		InvoicedQuantity: finvoice.InvoicedQuantity{
