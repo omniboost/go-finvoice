@@ -23,9 +23,9 @@ type Finvoice struct {
 	BuyerPartyDetails             BuyerPartyDetails             `xml:"BuyerPartyDetails"`
 	BuyerCommunicationDetails     BuyerCommunicationDetails     `xml:"BuyerCommunicationDetails"`
 	DeliveryDetails               DeliveryDetails               `xml:"DeliveryDetails"`
-	FactoringAgreementDetailsType FactoringAgreementDetailsType `xml:"FactoringAgreementDetailsType"`
 	InvoiceDetails                InvoiceDetails                `xml:"InvoiceDetails"`
 	PaymentStatusDetails          PaymentStatusDetails          `xml:"PaymentStatusDetails"`
+	FactoringAgreementDetails FactoringAgreementDetails `xml:"FactoringAgreementDetails"`
 	InvoiceRows                   []InvoiceRow                  `xml:"InvoiceRow"`
 	EpiDetails                    EpiDetails                    `xml:"EpiDetails"`
 }
@@ -133,7 +133,7 @@ type DeliveryDetails struct {
 	DeliveryDate Date `xml:"DeliveryDate"`
 }
 
-type FactoringAgreementDetailsType struct {
+type FactoringAgreementDetails struct {
 	FactoringAgreementIdentifier       string              `xml:"FactoringAgreementIdentifier"`
 	TransmissionListIdentifier         string              `xml:"TransmissionListIdentifier"`
 	EndorsementClauseCode              string              `xml:"EndorsementClauseCode"`
