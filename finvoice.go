@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"encoding/xml"
 	"fmt"
+	"strconv"
 	"strings"
 	"time"
 
@@ -12,22 +13,22 @@ import (
 )
 
 type Finvoice struct {
-	XMLName                       xml.Name                      `xml:"Finvoice"`
-	Version                       string                        `xml:"Version,attr"`
-	Xsi                           string                        `xml:"xmlns:xsi,attr"`
-	NoNamespaceSchemaLocation     string                        `xml:"xsi:noNamespaceSchemaLocation,attr"`
-	MessageTransmissionDetails    MessageTransmissionDetails    `xml:"MessageTransmissionDetails"`
-	SellerPartyDetails            SellerPartyDetails            `xml:"SellerPartyDetails"`
-	SellerCommunicationDetails    SellerCommunicationDetails    `xml:"SellerCommunicationDetails"`
-	SellerInformationDetails      SellerInformationDetails      `xml:"SellerInformationDetails"`
-	BuyerPartyDetails             BuyerPartyDetails             `xml:"BuyerPartyDetails"`
-	BuyerCommunicationDetails     BuyerCommunicationDetails     `xml:"BuyerCommunicationDetails"`
-	DeliveryDetails               DeliveryDetails               `xml:"DeliveryDetails"`
-	InvoiceDetails                InvoiceDetails                `xml:"InvoiceDetails"`
-	PaymentStatusDetails          PaymentStatusDetails          `xml:"PaymentStatusDetails"`
-	FactoringAgreementDetails FactoringAgreementDetails `xml:"FactoringAgreementDetails"`
-	InvoiceRows                   []InvoiceRow                  `xml:"InvoiceRow"`
-	EpiDetails                    EpiDetails                    `xml:"EpiDetails"`
+	XMLName                    xml.Name                   `xml:"Finvoice"`
+	Version                    string                     `xml:"Version,attr"`
+	Xsi                        string                     `xml:"xmlns:xsi,attr"`
+	NoNamespaceSchemaLocation  string                     `xml:"xsi:noNamespaceSchemaLocation,attr"`
+	MessageTransmissionDetails MessageTransmissionDetails `xml:"MessageTransmissionDetails"`
+	SellerPartyDetails         SellerPartyDetails         `xml:"SellerPartyDetails"`
+	SellerCommunicationDetails SellerCommunicationDetails `xml:"SellerCommunicationDetails"`
+	SellerInformationDetails   SellerInformationDetails   `xml:"SellerInformationDetails"`
+	BuyerPartyDetails          BuyerPartyDetails          `xml:"BuyerPartyDetails"`
+	BuyerCommunicationDetails  BuyerCommunicationDetails  `xml:"BuyerCommunicationDetails"`
+	DeliveryDetails            DeliveryDetails            `xml:"DeliveryDetails"`
+	InvoiceDetails             InvoiceDetails             `xml:"InvoiceDetails"`
+	PaymentStatusDetails       PaymentStatusDetails       `xml:"PaymentStatusDetails"`
+	FactoringAgreementDetails  FactoringAgreementDetails  `xml:"FactoringAgreementDetails,omitempty"`
+	InvoiceRows                []InvoiceRow               `xml:"InvoiceRow"`
+	EpiDetails                 EpiDetails                 `xml:"EpiDetails"`
 }
 
 func (f Finvoice) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
@@ -134,14 +135,18 @@ type DeliveryDetails struct {
 }
 
 type FactoringAgreementDetails struct {
-	FactoringAgreementIdentifier       string              `xml:"FactoringAgreementIdentifier"`
-	TransmissionListIdentifier         string              `xml:"TransmissionListIdentifier"`
-	EndorsementClauseCode              string              `xml:"EndorsementClauseCode"`
-	FactoringTypeCode                  string              `xml:"FactoringTypeCode"`
-	FactoringFreeText                  string              `xml:"FactoringFreeText"`
-	FactoringPartyIdentifier           PartyLegalRegIdType `xml:"FactoringPartyIdentifier"`
-	FactoringPartyName                 string              `xml:"FactoringPartyName"`
-	FactoringPartyPostalAddressDetails string              `xml:"FactoringPartyPostalAddressDetails"`
+	FactoringAgreementIdentifier       string                             `xml:"FactoringAgreementIdentifier"`
+	TransmissionListIdentifier         string                             `xml:"TransmissionListIdentifier"`
+	EndorsementClauseCode              string                             `xml:"EndorsementClauseCode"`
+	FactoringTypeCode                  string                             `xml:"FactoringTypeCode"`
+	FactoringFreeText                  string                             `xml:"FactoringFreeText"`
+	FactoringPartyIdentifier           PartyLegalRegIdType                `xml:"FactoringPartyIdentifier"`
+	FactoringPartyName                 string                             `xml:"FactoringPartyName"`
+	FactoringPartyPostalAddressDetails FactoringPartyPostalAddressDetails `xml:"FactoringPartyPostalAddressDetails"`
+}
+
+func (f FactoringAgreementDetails) IsEmpty() bool {
+	return zero.IsZero(f)
 }
 
 type InvoiceDetails struct {
@@ -206,6 +211,8 @@ type InvoicedQuantity struct {
 	QuantityUnitCode string `xml:"QuantityUnitCode,attr"`
 	Amount           Amount `xml:",chardata"`
 }
+
+
 
 func (i InvoicedQuantity) IsEmpty() bool {
 	return zero.IsZero(i)
@@ -272,13 +279,34 @@ type EpiCharge struct {
 	ChargeOption string `xml:"ChargeOption,attr"`
 }
 
-type Amount float64
+type Amount string
 
 func (a Amount) MarshalText() ([]byte, error) {
-	s := fmt.Sprintf("%.2f", float64(a))
-	s = strings.Replace(s, ".", ",", -1)
+	s := strings.Replace(string(a), ".", ",", -1)
 	return []byte(s), nil
 }
+
+// func (a *Amount) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
+// 	s := ""
+// 	err := d.DecodeElement(&s, &start)
+// 	if err != nil {
+// 		return err
+// 	}
+
+// 	if s == "" {
+// 		return nil
+// 	}
+
+// 	s = strings.Replace(s, ",", ".", -1)
+// 	n, err := strconv.ParseFloat(s, 64)
+// 	if err != nil {
+// 		return err
+// 	}
+
+// 	*a = Amount(n)
+// 	return err
+// }
+
 
 type AmountCurrency struct {
 	AmountCurrencyIdentifier string `xml:"AmountCurrencyIdentifier,attr"`
@@ -302,6 +330,34 @@ type Number float64
 
 func (n Number) IsEmpty() bool {
 	return n == Number(0.0)
+}
+
+func (n Number) MarshalText() ([]byte, error) {
+	s := fmt.Sprintf("%.2f", float64(n))
+	s = strings.Replace(s, ".", ",", -1)
+	return []byte(s), nil
+}
+
+func (a *Number) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
+	s := ""
+	
+	err := d.DecodeElement(&s, &start)
+	if err != nil {
+		return err
+	}
+
+	if s == "" {
+		return nil
+	}
+
+	s = strings.Replace(s, ",", ".", -1)
+	n, err := strconv.ParseFloat(s, 64)
+	if err != nil {
+		return err
+	}
+
+	*a = Number(n)
+	return err
 }
 
 type VATSpecificationDetails struct {
@@ -362,3 +418,15 @@ func (d DateTime) MarshalText() ([]byte, error) {
 }
 
 type PartyLegalRegIdType string
+
+type FactoringPartyPostalAddressDetails struct {
+	FactoringPartyStreetName              string          `xml:"FactoringPartyStreetName"`
+	FactoringPartyTownName                string          `xml:"FactoringPartyTownName"`
+	FactoringPartyPostCodeIdentifier      string          `xml:"FactoringPartyPostCodeIdentifier"`
+	FactoringPartyCountrySubdivision      string          `xml:"FactoringPartyCountrySubdivision"`
+	CountryCode                           CountryCodeType `xml:"CountryCode"`
+	CountryName                           string          `xml:"CountryName"`
+	FactoringPartyPostOfficeBoxIdentifier string          `xml:"FactoringPartyPostOfficeBoxIdentifier"`
+}
+
+type CountryCodeType string
