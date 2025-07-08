@@ -201,6 +201,7 @@ type InvoiceRow struct {
 	RowFreeText          string         `xml:"RowFreeText"`
 	RowVATAmount         AmountCurrency `xml:"RowVatAmount"`
 	RowVATExcludedAmount AmountCurrency `xml:"RowVatExcludedAmount"`
+	RowVATRatePercent    Amount `xml:"RowVatRatePercent"`
 }
 
 func (i InvoiceRow) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
@@ -211,8 +212,6 @@ type InvoicedQuantity struct {
 	QuantityUnitCode string `xml:"QuantityUnitCode,attr"`
 	Amount           Amount `xml:",chardata"`
 }
-
-
 
 func (i InvoicedQuantity) IsEmpty() bool {
 	return zero.IsZero(i)
@@ -307,7 +306,6 @@ func (a Amount) MarshalText() ([]byte, error) {
 // 	return err
 // }
 
-
 type AmountCurrency struct {
 	AmountCurrencyIdentifier string `xml:"AmountCurrencyIdentifier,attr"`
 	Amount                   Amount `xml:",chardata"`
@@ -340,7 +338,7 @@ func (n Number) MarshalText() ([]byte, error) {
 
 func (a *Number) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
 	s := ""
-	
+
 	err := d.DecodeElement(&s, &start)
 	if err != nil {
 		return err
